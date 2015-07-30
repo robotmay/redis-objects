@@ -135,7 +135,7 @@ class Redis
         # It is more efficient to use increment_[counter_name] directly.
         # This is mainly just for completeness to override ActiveRecord.
         def increment(name, by=1)
-          if self.class.send("counter_defined?", name)
+          if self.class.send("counter_defined?", name.to_sym)
             send(name).increment(by)
           else
             super
@@ -146,7 +146,7 @@ class Redis
         # It is more efficient to use increment_[counter_name] directly.
         # This is mainly just for completeness to override ActiveRecord.
         def decrement(name, by=1)
-          if self.class.send("counter_defined?", name)
+          if self.class.send("counter_defined?", name.to_sym)
             send(name).decrement(by)
           else
             super
